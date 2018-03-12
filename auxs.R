@@ -1,4 +1,7 @@
 parse_academic_production <- function(key) {
+  ## Download using read-only link
+  # As seen here: https://stackoverflow.com/questions/42461806/getting-a-csv-read-into-r-though-a-shareable-google-drive-link
+  
   sheet <- "Hoja 1"
   link <- sprintf("https://docs.google.com/spreadsheets/d/%s/gviz/tq?tqx=out:csv&sheet={%s}", key, sheet)
   raw <- read.csv(link, encoding='UTF-8', dec=',')
@@ -34,4 +37,13 @@ parse_academic_production <- function(key) {
   # Read money
   tidy <- mutate(tidy, 
                  Amount = as.numeric(Amount))
+}
+
+
+plot_map <- function(countries) {
+  library(maptools)
+  
+  data(wrld_simpl)
+  myCountries = wrld_simpl@data$NAME %in% countries
+  plot(wrld_simpl, xlim = c(0,10), ylim = c(35,60), bg='lightblue', col = c('lightgrey', 'olivedrab3')[myCountries+1])
 }
