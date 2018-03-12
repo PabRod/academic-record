@@ -1,0 +1,55 @@
+---
+title: "Academic activity"
+author: "Pablo Rodríguez"
+date: "March 12, 2018"
+output: html_document
+---
+
+```{r Setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Dependencies, include=FALSE}
+rm(list = ls())
+source('auxs.R')
+library(ggplot2)
+```
+
+
+```{r Load, include=FALSE, warning=FALSE, message=FALSE}
+key <- "1DVLcKvMLVrdkn2kRO-X-_KADaqVnhM4yyWddP-UN-40"
+data <- parse_academic_production(key)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## Science communication activity
+```{r Scicomm, echo=FALSE}
+sci_comm <- filter(data, Type == 'Article')
+
+hist(sci_comm$Date, breaks=20)
+```
+
+Up to date, I've published `r nrow(sci_comm)` science communication essays.
+
+```{r ScicommDist, echo=FALSE}
+ggp <- ggplot(sci_comm, aes(x=Description))
+ggp <- ggp + geom_bar(fill='red') + ggtitle('Science communication essays')
+ggp <- ggp + xlab('Publisher') + ylab('Amount')
+
+ggp
+```
+
+## Visited countries
+
+You can also embed plots, for example:
+
+```{r Map, echo=FALSE, warning=FALSE, message=FALSE}
+map <- plot_map(data$Country)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
