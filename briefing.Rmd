@@ -5,11 +5,11 @@ date: "March 12, 2018"
 output: html_document
 ---
 
-```{r Setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r Setup, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r Dependencies, include=FALSE}
+```{r Dependencies, warning=FALSE, message=FALSE}
 rm(list = ls())
 source('auxs.R')
 library(knitr)
@@ -19,17 +19,17 @@ library(sp)
 ```
 
 
-```{r Load, include=FALSE, warning=FALSE, message=FALSE}
+```{r Load, warning=FALSE, message=FALSE}
 key <- "1DVLcKvMLVrdkn2kRO-X-_KADaqVnhM4yyWddP-UN-40"
 data <- parse_academic_production(key)
 ```
 
-```{r Filter, echo=FALSE, include=FALSE, warning=FALSE}
+```{r Filter, include=FALSE, warning=FALSE}
 data_table <- select(data, Date, Name, Type, Language)
 ```
 
-```{r Table, include=TRUE, warning=FALSE}
-tab <- kable(data_table, format='markdown')
+```{r Table, warning=FALSE}
+tab <- kable(head(data_table), format='markdown')
 tab
 
 #library(kableExtra)
@@ -43,20 +43,27 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 ## Science communication activity
-```{r Scicomm, echo=FALSE}
+```{r Scicomm}
 sci_comm <- filter(data, Type == 'Article')
 sci_comm_table <- select(sci_comm, Date, Name, Institution, Language, URL)
 
 n_spanish <- nrow(filter(sci_comm, Language == 'Spanish'))
 n_english <- nrow(filter(sci_comm, Language == 'English'))
-
-kable(sci_comm_table, format='markdown')
-hist(sci_comm$Date, breaks=20)
 ```
 
 Up to date, I've published `r nrow(sci_comm)` science communication essays: `r n_english` in english, and `r n_spanish` in spanish language.
 
-```{r ScicommDist, echo=FALSE}
+```{r ScicommDates}
+hist(sci_comm$Date, breaks=20)
+```
+
+Latest science communication publications:
+
+```{r ScicommTab}
+kable(head(sci_comm_table), format='markdown')
+```
+
+```{r ScicommDist}
 ggp <- ggplot(sci_comm, aes(x=Institution))
 ggp <- ggp + geom_bar(fill='red') + ggtitle('Science communication essays')
 ggp <- ggp + xlab('Publisher') + ylab('Amount')
@@ -68,7 +75,6 @@ ggp
 
 You can also embed plots, for example:
 
-```{r Map, echo=FALSE, warning=FALSE, message=FALSE}
+```{r Map, warning=FALSE, message=FALSE}
 map <- plot_map(data$Country)
 ```
-
