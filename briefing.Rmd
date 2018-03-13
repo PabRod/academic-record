@@ -12,6 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r Dependencies, include=FALSE}
 rm(list = ls())
 source('auxs.R')
+library(knitr)
+library(dplyr)
 library(ggplot2)
 ```
 
@@ -19,6 +21,18 @@ library(ggplot2)
 ```{r Load, include=FALSE, warning=FALSE, message=FALSE}
 key <- "1DVLcKvMLVrdkn2kRO-X-_KADaqVnhM4yyWddP-UN-40"
 data <- parse_academic_production(key)
+```
+
+```{r Filter, echo=FALSE, include=FALSE, warning=FALSE}
+data_table <- select(data, Date, Name, Type, Language)
+```
+
+```{r Table, include=TRUE, warning=FALSE}
+tab <- kable(data_table, format='markdown')
+tab
+
+#library(kableExtra)
+#kable(data_table, format='html') %>% kable_styling() %>% scroll_box(width = "500px", height = "200px")
 ```
 
 ## R Markdown
@@ -30,11 +44,16 @@ When you click the **Knit** button a document will be generated that includes bo
 ## Science communication activity
 ```{r Scicomm, echo=FALSE}
 sci_comm <- filter(data, Type == 'Article')
+sci_comm_table <- select(sci_comm, Date, Name, Description, Language, URL)
 
+n_spanish <- nrow(filter(sci_comm, Language == 'Spanish'))
+n_english <- nrow(filter(sci_comm, Language == 'English'))
+
+kable(sci_comm_table, format='markdown')
 hist(sci_comm$Date, breaks=20)
 ```
 
-Up to date, I've published `r nrow(sci_comm)` science communication essays.
+Up to date, I've published `r nrow(sci_comm)` science communication essays: `r n_english` in english, and `r n_spanish` in spanish language.
 
 ```{r ScicommDist, echo=FALSE}
 ggp <- ggplot(sci_comm, aes(x=Description))
@@ -52,4 +71,3 @@ You can also embed plots, for example:
 map <- plot_map(data$Country)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
