@@ -7,9 +7,10 @@ parse_academic_production <- function(key) {
   raw <- read.csv(link, encoding='UTF-8', dec=',')
   
   ## Clean the data
-  library(tidyverse)
+  library(dplyr)
   library(lubridate)
-  # library(googlesheets)
+  #library(urlshorteneR)
+  #shortener_authenticate("86368629146-2ag2qh1j4c26mf5dtm5p7gi85esn3i.apps.googleusercontent.com", "55Y3NsWjiic5Uv8mT-YNMWlK")
   
   tidy <- raw # By default, everything is understood as a factor
   
@@ -37,6 +38,8 @@ parse_academic_production <- function(key) {
   # Read money
   tidy <- mutate(tidy, 
                  Amount = as.numeric(Amount))
+  
+  #tidy <- mutate(tidy, URL_short = shorten.google(URL))
 }
 
 

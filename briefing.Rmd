@@ -15,6 +15,7 @@ source('auxs.R')
 library(knitr)
 library(dplyr)
 library(ggplot2)
+library(sp)
 ```
 
 
@@ -44,7 +45,7 @@ When you click the **Knit** button a document will be generated that includes bo
 ## Science communication activity
 ```{r Scicomm, echo=FALSE}
 sci_comm <- filter(data, Type == 'Article')
-sci_comm_table <- select(sci_comm, Date, Name, Description, Language, URL)
+sci_comm_table <- select(sci_comm, Date, Name, Institution, Language, URL)
 
 n_spanish <- nrow(filter(sci_comm, Language == 'Spanish'))
 n_english <- nrow(filter(sci_comm, Language == 'English'))
@@ -56,7 +57,7 @@ hist(sci_comm$Date, breaks=20)
 Up to date, I've published `r nrow(sci_comm)` science communication essays: `r n_english` in english, and `r n_spanish` in spanish language.
 
 ```{r ScicommDist, echo=FALSE}
-ggp <- ggplot(sci_comm, aes(x=Description))
+ggp <- ggplot(sci_comm, aes(x=Institution))
 ggp <- ggp + geom_bar(fill='red') + ggtitle('Science communication essays')
 ggp <- ggp + xlab('Publisher') + ylab('Amount')
 
