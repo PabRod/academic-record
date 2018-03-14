@@ -39,6 +39,10 @@ parse_academic_production <- function(key) {
   tidy <- mutate(tidy, 
                  Amount = as.numeric(Amount))
   
+  # Combine name and URL for electronic publications
+  tidy <- mutate(tidy, 
+                 NameURL = paste0("[", Name, "](", URL, ")"))
+  
   #tidy <- mutate(tidy, URL_short = shorten.google(URL))
 }
 
