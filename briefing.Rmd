@@ -22,7 +22,11 @@ library(sp)
 ```{r Load, warning=FALSE, message=FALSE}
 key <- "1DVLcKvMLVrdkn2kRO-X-_KADaqVnhM4yyWddP-UN-40"
 data <- parse_academic_production(key)
+```
+
+```{r Backups, warning=FALSE, message=FALSE}
 save(data, file='backup.Rda')
+write.csv(data, file='backup.csv', fileEncoding='UTF-8', dec=',')
 ```
 
 ```{r Filter, warning=FALSE}
