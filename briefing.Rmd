@@ -22,9 +22,10 @@ library(sp)
 ```{r Load, warning=FALSE, message=FALSE}
 key <- "1DVLcKvMLVrdkn2kRO-X-_KADaqVnhM4yyWddP-UN-40"
 data <- parse_academic_production(key)
+save(data, file='backup.Rda')
 ```
 
-```{r Filter, include=FALSE, warning=FALSE}
+```{r Filter, warning=FALSE}
 data_table <- select(data, Date, Name, Type, Language)
 ```
 
