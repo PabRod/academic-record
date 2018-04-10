@@ -12,7 +12,9 @@ options(knitr.kable.NA = '')
 
 ```{r Dependencies, warning=FALSE, message=FALSE}
 rm(list = ls())
+
 source('auxs.R')
+
 library(knitr)
 library(dplyr)
 library(ggplot2)
@@ -39,7 +41,7 @@ data_table <- select(data, Date, Name, Type, Language)
 ## Secondments
 ```{r Secondments}
 secs <- filter(data, Type == 'Secondment')
-secs <- select(secs, Date, End.date, Name, Institution)
+secs <- select(secs, Date, End.date, Institution)
 secs <- mutate(secs, Duration = round(difftime(End.date, Date, units='weeks')))
 
 secs_duration <- sum(secs$Duration)
@@ -54,7 +56,7 @@ kable(secs, format='markdown')
 ## Talks and classes given
 ```{r Talks}
 talks <- filter(data, grepl('Pablo Rodríguez', Author), Type == 'Seminar' | Type == 'Congress' | Type == 'Course')
-talks <- select(talks, Date, End.date, Name, Institution)
+talks <- select(talks, Date, End.date, Name, Institution, Language)
 kable(talks, format='markdown')
 ```
 
