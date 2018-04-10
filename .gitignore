@@ -3,7 +3,10 @@
 .RData
 .Ruserdata
 .httr-oauth
+
 *.html
 *.pdf
 *.Rda
+
+backup.csv
 key.txt
