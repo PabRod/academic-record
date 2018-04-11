@@ -53,11 +53,32 @@ I've spent `r secs_duration` weeks in secondments, distributed as the following:
 kable(secs, format='markdown')
 ```
 
-## Talks and classes given
+## Conferences and workshops attended
+```{r Conferences}
+confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & Role == 'Attendant')
+confs <- select(confs, Date, Name, Institution, Country, Language)
+kable(confs, format='markdown')
+```
+
+## Talks
 ```{r Talks}
-talks <- filter(data, Role == 'Speaker' | Role == 'Teaching assistant')
-talks <- select(talks, Date, End.date, Name, Type, Institution, Language)
+talks <- filter(data, Type != 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
+talks <- select(talks, Date, Name, Type, Institution, Language)
 kable(talks, format='markdown')
+```
+
+## Teaching
+```{r Classes}
+classes <- filter(data, Type == 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
+classes <- select(classes, Date, End.date, Name, Institution, Language)
+kable(classes, format='markdown')
+```
+
+## Books and book chapters
+```{r Books}
+books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
+books <- select(books, Date, Name, Institution, Language)
+kable(books, format='markdown')
 ```
 
 ## Science communication activity
@@ -100,7 +121,7 @@ ggp
 
 ## Visited countries
 
-You can also embed plots, for example:
+In green you can see the countries I've visited for academic reasons:
 
 ```{r Map, warning=FALSE, message=FALSE}
 map <- plot_map(data$Country)

@@ -42,8 +42,6 @@ parse_academic_production <- function(key) {
   # Combine name and URL in a clickable string for electronic publications
   tidy <- mutate(tidy, 
                  NameURL = paste0("[", Name, "](", URL, ")"))
-  
-  #tidy <- mutate(tidy, URL_short = shorten.google(URL))
 }
 
 
