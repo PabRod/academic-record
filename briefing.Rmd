@@ -26,7 +26,17 @@ library(sp)
 
 ```{r Load, warning=FALSE, message=FALSE}
 key <- read_file('key.txt')
-data <- parse_academic_production(key)
+data <- tryCatch(
+  {
+  data <- parse_academic_production(key)
+  },
+  error = function(cond){
+    message('Unable to access URL. Using backup version')
+    
+    load('backup.Rda')
+    return(data)
+  }
+  )
 ```
 
 ```{r Backups}
