@@ -55,8 +55,8 @@ kable(secs, format='markdown')
 
 ## Talks and classes given
 ```{r Talks}
-talks <- filter(data, grepl('Pablo Rodríguez', Author), Type == 'Seminar' | Type == 'Congress' | Type == 'Course')
-talks <- select(talks, Date, End.date, Name, Institution, Language)
+talks <- filter(data, Role == 'Speaker' | Role == 'Teaching assistant')
+talks <- select(talks, Date, End.date, Name, Type, Institution, Language)
 kable(talks, format='markdown')
 ```
 
