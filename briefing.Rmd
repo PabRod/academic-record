@@ -2,7 +2,8 @@
 title: "Academic activity"
 author: "Pablo Rodríguez"
 date: "March 12, 2018"
-output: 
+output:
+  html_document:
   md_document:
     toc: false
     includes:
@@ -73,8 +74,8 @@ kable(secs, format='markdown')
 
 ## Conferences and workshops attended
 ```{r Conferences}
-confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & Role == 'Attendant')
-confs <- select(confs, Date, Name, Institution, Country, Language)
+confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & (Role == 'Attendant' | Role == 'Organizer'))
+confs <- select(confs, Date, NameURL, Institution, Country, Language)
 
 confs_num <- nrow(confs)
 ```
