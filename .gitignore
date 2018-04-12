@@ -5,10 +5,10 @@
 .httr-oauth
 
 *_files*
-*.md
 *.html
 *.pdf
 *.Rda
+briefing.md
 
 backup.csv
 key.txt

@@ -2,7 +2,11 @@
 title: "Academic activity"
 author: "Pablo Rodríguez"
 date: "March 12, 2018"
-output: github_document
+output: 
+  md_document:
+    toc: false
+    includes:
+      in_header: header.md
 ---
 
 ```{r Setup, echo=FALSE}
