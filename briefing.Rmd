@@ -28,7 +28,7 @@ library(sp)
 key <- read_file('key.txt')
 data <- tryCatch(
   {
-  data <- parse_academic_production(key)
+    data <- parse_academic_production(key)
   },
   error = function(cond){
     message('Unable to access URL. Using backup version')
@@ -67,6 +67,13 @@ kable(secs, format='markdown')
 ```{r Conferences}
 confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & Role == 'Attendant')
 confs <- select(confs, Date, Name, Institution, Country, Language)
+
+confs_num <- nrow(confs)
+```
+
+I've attended `r confs_num` congresses and workshops:
+
+```{r ConferencesTab}
 kable(confs, format='markdown')
 ```
 
@@ -74,13 +81,27 @@ kable(confs, format='markdown')
 ```{r Talks}
 talks <- filter(data, Type != 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
 talks <- select(talks, Date, Name, Type, Institution, Language)
+
+talks_num <- nrow(talks)
+```
+
+I've given `r talks_num` talks:
+
+```{r TalksTab}
 kable(talks, format='markdown')
 ```
 
 ## Teaching
 ```{r Classes}
-classes <- filter(data, Type == 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
-classes <- select(classes, Date, End.date, Name, Institution, Language)
+classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
+classes <- select(classes, Date, End.date, Name, Role, Institution, Language)
+
+classes_num <- nrow(classes)
+```
+
+I've been involved in the teaching of `r classes_num` courses:
+
+```{r ClassesTab}
 kable(classes, format='markdown')
 ```
 
@@ -103,7 +124,7 @@ sci_comm_table_es <- filter(sci_comm_table, Language == 'Spanish')
 sci_comm_table_es <- select(sci_comm_table_es, -Language)
 ```
 
-Up to date, I've published `r nrow(sci_comm)` science communication essays: `r nrow(sci_comm_table_en)` in english, and `r nrow(sci_comm_table_es)` in spanish language.
+Up to date, I've published `r nrow(sci_comm)` science communication essays: `r nrow(sci_comm_table_en)` in English, and `r nrow(sci_comm_table_es)` in Spanish.
 
 ```{r ScicommDates}
 hist(sci_comm$Date, breaks=20)
@@ -131,7 +152,7 @@ ggp
 
 ## Visited countries
 
-In green you can see the countries I've visited for academic reasons:
+I've visited the following countries for academic reasons:
 
 ```{r Map, warning=FALSE, message=FALSE}
 map <- plot_map(data$Country)
