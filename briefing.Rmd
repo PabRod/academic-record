@@ -1,9 +1,10 @@
 ---
 title: "Academic activity"
 author: "Pablo Rodríguez"
-date: "March 12, 2018"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   html_document:
+    toc: true
   md_document:
     toc: false
     includes:
@@ -72,10 +73,10 @@ I've spent `r secs_duration` weeks in secondments, distributed as the following:
 kable(secs, format='markdown')
 ```
 
-## Conferences and workshops attended
+## Conferences and workshops
 ```{r Conferences}
-confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & (Role == 'Attendant' | Role == 'Organizer'))
-confs <- select(confs, Date, NameURL, Institution, Country, Language)
+confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & (Role == 'Attendant' | Role == 'Organizer' | Role == 'Invited speaker'))
+confs <- select(confs, Date, NameURL, Institution, Role, Country, Language)
 
 confs_num <- nrow(confs)
 ```
