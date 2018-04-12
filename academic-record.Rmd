@@ -39,15 +39,15 @@ data <- tryCatch(
   error = function(cond){
     message('Unable to access URL. Using backup version')
 
-    load('backup.Rda')
+    load('./backups/backup.Rda')
     return(data)
   }
   )
 ```
 
 ```{r Backups}
-save(data, file='backup.Rda')
-write.csv(data, file='backup.csv', fileEncoding='UTF-8')
+save(data, file='./backups/backup.Rda')
+write.csv(data, file='./backups/backup.csv', fileEncoding='UTF-8')
 ```
 
 ```{r FilterFuture}
