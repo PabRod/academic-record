@@ -1,14 +1,15 @@
 ---
-title: "Academic activity"
-author: "Pablo Rodríguez"
+title: "Academic record"
+author: "Pablo Rodríguez-Sánchez"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  html_document:
-    toc: true
+  github_document:
   md_document:
     toc: true
     includes:
       in_header: header.md
+  html_document:
+    toc: true
 ---
 
 ```{r Setup, echo=FALSE}
@@ -171,5 +172,3 @@ map <- plot_map(data$Country)
 ***
 
 Built with R `r getRversion()` and RStudio.
-
-<!-- TODO: publish in GitHub -->
