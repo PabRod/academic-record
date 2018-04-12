@@ -44,6 +44,10 @@ save(data, file='backup.Rda')
 write.csv(data, file='backup.csv', fileEncoding='UTF-8')
 ```
 
+```{r FilterFuture}
+data <- filter(data, Date < today())
+```
+
 ```{r Filter, warning=FALSE}
 data_table <- select(data, Date, Name, Type, Language)
 ```
