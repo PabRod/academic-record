@@ -2,7 +2,7 @@
 title: "Academic activity"
 author: "Pablo Rodríguez"
 date: "March 12, 2018"
-output: html_document
+output: github_document
 ---
 
 ```{r Setup, echo=FALSE}
@@ -55,7 +55,7 @@ data_table <- select(data, Date, Name, Type, Language)
 ## Secondments
 ```{r Secondments}
 secs <- filter(data, Type == 'Secondment')
-secs <- select(secs, Date, End.date, Institution)
+secs <- select(secs, Date, End.date, Institution, Country)
 secs <- mutate(secs, Duration = round(difftime(End.date, Date, units='weeks')))
 
 secs_duration <- sum(secs$Duration)
@@ -84,7 +84,7 @@ kable(confs, format='markdown')
 ## Talks
 ```{r Talks}
 talks <- filter(data, Type != 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
-talks <- select(talks, Date, Name, Type, Institution, Language)
+talks <- select(talks, Date, NameURL, Type, Institution, Language)
 
 talks_num <- nrow(talks)
 ```

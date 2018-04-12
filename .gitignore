@@ -4,6 +4,8 @@
 .Ruserdata
 .httr-oauth
 
+*_files*
+*.md
 *.html
 *.pdf
 *.Rda
