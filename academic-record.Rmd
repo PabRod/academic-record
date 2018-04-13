@@ -3,7 +3,6 @@ title: "Academic record"
 author: "Pablo Rodríguez-Sánchez"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
-  github_document:
   md_document:
     toc: true
     includes:
@@ -76,7 +75,7 @@ kable(secs, format='markdown')
 
 ## Conferences and workshops
 ```{r Conferences}
-confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & (Role == 'Attendant' | Role == 'Organizer' | Role == 'Invited speaker'))
+confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & (Role == 'Attendant' | Role == 'Organizer' | Role == 'Invited speaker' | Role == 'Poster'))
 confs <- select(confs, Date, NameURL, Institution, Role, Country, Language)
 
 confs_num <- nrow(confs)
