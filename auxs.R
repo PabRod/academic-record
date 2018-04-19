@@ -55,3 +55,11 @@ plot_map <- function(countries) {
   myCountries = wrld_simpl@data$NAME %in% countries
   plot(wrld_simpl, xlim = c(0,10), ylim = c(35,60), bg='lightblue', col = c('lightgrey', 'olivedrab3')[myCountries+1])
 }
+
+updateHeader <- function(input, output, encoding='utf-8') {
+  new_date <- format(Sys.time(), '%m/%d/%Y, %H:%M:%S')
+  date_of_modification <- paste('Modified:', new_date)
+  header_base <- readLines(input, encoding = encoding)
+  header_with_date <- c(header_base, date_of_modification)
+  writeLines(header_with_date, con = output)
+}
