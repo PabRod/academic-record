@@ -4,9 +4,9 @@ author: "Pablo Rodríguez-Sánchez"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   md_document:
-    toc: true
+    toc: false
     includes:
-      in_header: header.md
+      in_header: headers/header_with_date.md
   html_document:
     toc: true
 ---
