@@ -1,0 +1,120 @@
+---
+title: "Scientific communication"
+author: "Pablo Rodríguez-Sánchez"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: false
+  md_document:
+    toc: false
+    includes:
+      in_header: headers/hdr_temp.md
+---
+
+```{r Setup, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+options(knitr.kable.NA = '')
+```
+
+```{r Dependencies, warning=FALSE, message=FALSE}
+source('auxs.R')
+
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(readr)
+library(sp)
+```
+
+
+```{r Load, warning=FALSE, message=FALSE}
+key <- read_file('key.txt')
+data <- tryCatch(
+  {
+    data <- parse_academic_production(key)
+  },
+  error = function(cond){
+    message('Unable to access URL. Using backup version')
+
+    load('./backups/backup.Rda')
+    return(data)
+  }
+  )
+```
+
+```{r Backups}
+save(data, file='./backups/backup.Rda')
+write.csv(data, file='./backups/backup.csv', fileEncoding='UTF-8')
+```
+
+```{r FilterFuture}
+data <- filter(data, Date < today())
+```
+
+```{r Filter, warning=FALSE}
+data_table <- select(data, Date, Name, Type, Language)
+```
+
+## Docencia
+```{r Classes}
+classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
+classes <- select(classes, Date, End.date, Name, Role, Institution, Language)
+
+classes_num <- nrow(classes)
+```
+
+He participado en la docencia de `r classes_num` cursos:
+
+```{r ClassesTab}
+kable(classes, format='markdown')
+```
+
+## Libros y capítulos de libros
+```{r Books}
+books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
+books <- select(books, Date, Name, Institution, Language)
+kable(books, format='markdown')
+```
+
+## Publicaciones de divulgación científica
+```{r Scicomm}
+sci_comm <- filter(data, Type == 'Article')
+sci_comm_table <- select(sci_comm, Date, NameURL, Institution, Language)
+
+sci_comm_table_en <- filter(sci_comm_table, Language == 'English')
+sci_comm_table_en <- select(sci_comm_table_en, -Language)
+
+sci_comm_table_es <- filter(sci_comm_table, Language == 'Spanish')
+sci_comm_table_es <- select(sci_comm_table_es, -Language)
+```
+
+A día de hoy, he publicado `r nrow(sci_comm)` artículos breves sobre comunicación científica: `r nrow(sci_comm_table_en)` de ellos en inglés, y `r nrow(sci_comm_table_es)` en español.
+
+```{r ScicommDates, eval=FALSE}
+hist(sci_comm$Date, breaks=20)
+```
+
+Divulgación científica en inglés:
+
+```{r ScicommEnglish}
+kable(sci_comm_table_en, format='markdown')
+```
+
+Divulgación científica en español:
+
+```{r ScicommTab}
+kable(sci_comm_table_es, format='markdown')
+```
+
+```{r ScicommDist, eval=FALSE}
+ggp <- ggplot(sci_comm, aes(x=Institution))
+ggp <- ggp + geom_bar(fill='red') + ggtitle('Science communication essays')
+ggp <- ggp + xlab('Publisher') + ylab('Amount')
+
+ggp
+```
+
+***
+
+Built with R `r getRversion()` and RStudio.

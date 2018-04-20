@@ -1,4 +1,4 @@
-Title: Scientific communication00000
+Title: Scientific communication
 Date: 4/12/2018, 11:15:11 AM
 Category: About-me
 Tags: info
