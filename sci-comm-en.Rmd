@@ -8,7 +8,7 @@ output:
   md_document:
     toc: false
     includes:
-      in_header: headers/base_sci-comm_with_date.md
+      in_header: headers/hdr_temp.md
 ---
 
 ```{r Setup, echo=FALSE}
@@ -17,8 +17,6 @@ options(knitr.kable.NA = '')
 ```
 
 ```{r Dependencies, warning=FALSE, message=FALSE}
-rm(list = ls())
-
 source('auxs.R')
 
 library(knitr)
