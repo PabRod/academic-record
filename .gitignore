@@ -9,6 +9,7 @@
 *.html
 *.pdf
 *.Rda
+*with_date*
 
 key.txt
 academic-record.md
