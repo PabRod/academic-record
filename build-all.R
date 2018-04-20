@@ -4,13 +4,19 @@ rm(list = ls())
 source('config.R')
 source('auxs.R')
 
-updateHeader(hdr_scicomm_en, hdr_temp)
+n <- length(inputs)
 
-render(input_scicomm_en, 
-       output_format = 'md_document', 
-       output_file = output_name_scicomm_en,
-       output_dir = output_dir,
-       encoding = 'utf-8',
-       clean = TRUE)
-
-file.remove(hdr_temp)
+for (i in 1:n) {
+  if (active[i]) {
+    updateHeader(headers[i], hdr_temp)
+    
+    render(inputs[i], 
+           output_format = 'md_document', 
+           output_file = output_filenames[1],
+           output_dir = output_dir,
+           encoding = 'utf-8',
+           clean = TRUE)
+    
+    file.remove(hdr_temp)
+  }
+}
