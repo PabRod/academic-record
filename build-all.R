@@ -23,9 +23,9 @@ render('sci-comm-en.Rmd',
        clean = TRUE)
 
 # Copy the files in the appropriate locations
-file.copy('output/academic-record.md', 
-          '../../content/pages/academic-record.md', 
-          overwrite = TRUE)
+#file.copy('output/academic-record.md', 
+#          '../../content/pages/academic-record.md', 
+#          overwrite = TRUE)
 
 #input_images <- 'output/academic-record_files/figure-markdown_strict'
 #new_folder <- '../../content/images'
