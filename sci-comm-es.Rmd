@@ -41,28 +41,6 @@ data <- filter(data, Date < today())
 data_table <- select(data, Date, Name, Type, Language)
 ```
 
-## Docencia
-```{r Classes}
-classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
-classes <- select(classes, Date, End.date, Name, Role, Institution, Language)
-
-classes_num <- nrow(classes)
-```
-
-He participado en la docencia de `r classes_num` cursos:
-
-```{r ClassesTab}
-kable(classes, format='markdown')
-```
-
-## Libros y capítulos de libros
-```{r Books}
-books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
-books <- select(books, Date, Name, Institution, Language)
-kable(books, format='markdown')
-```
-
-## Publicaciones de divulgación científica
 ```{r Scicomm}
 sci_comm <- filter(data, Type == 'Article')
 sci_comm_table <- select(sci_comm, Date, NameURL, Institution, Language)

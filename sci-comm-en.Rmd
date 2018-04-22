@@ -41,28 +41,6 @@ data <- filter(data, Date < today())
 data_table <- select(data, Date, Name, Type, Language)
 ```
 
-## Teaching
-```{r Classes}
-classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
-classes <- select(classes, Date, End.date, Name, Role, Institution, Language)
-
-classes_num <- nrow(classes)
-```
-
-I've been involved in the teaching of `r classes_num` courses:
-
-```{r ClassesTab}
-kable(classes, format='markdown')
-```
-
-## Books and book chapters
-```{r Books}
-books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
-books <- select(books, Date, Name, Institution, Language)
-kable(books, format='markdown')
-```
-
-## Science communication activity
 ```{r Scicomm}
 sci_comm <- filter(data, Type == 'Article')
 sci_comm_table <- select(sci_comm, Date, NameURL, Institution, Language)
