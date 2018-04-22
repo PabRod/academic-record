@@ -32,22 +32,7 @@ library(sp)
 
 ```{r Load, warning=FALSE, message=FALSE}
 key <- read_file('key.txt')
-data <- tryCatch(
-  {
-    data <- parse_academic_production(key)
-  },
-  error = function(cond){
-    message('Unable to access URL. Using backup version')
-
-    load('./backups/backup.Rda')
-    return(data)
-  }
-  )
-```
-
-```{r Backups}
-save(data, file='./backups/backup.Rda')
-write.csv(data, file='./backups/backup.csv', fileEncoding='UTF-8')
+data <- get_data(key, save_backup = TRUE)
 ```
 
 ```{r FilterFuture}

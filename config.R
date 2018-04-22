@@ -19,3 +19,6 @@ output_filenames <- c(NULL,
 
 # Temporary header location
 hdr_temp <- 'headers/hdr_temp.md'
+
+# Backups location
+backups_dir <- './backups'

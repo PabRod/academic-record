@@ -1,3 +1,23 @@
+get_data <- function(key, save_backup = TRUE)
+  
+  tryCatch(
+  {
+    data <- parse_academic_production(key)
+    if (save_backup) {
+      save(data, file=paste(backups_dir, '/backup.Rda', sep =''))
+      write.csv(data, file=paste(backups_dir, '/backup.csv', sep =''), fileEncoding='UTF-8')
+    }
+    return(data)
+  },
+  error = function(cond){
+    message('Unable to access URL. Using backup version')
+    
+    load('./backups/backup.Rda')
+    return(data)
+  }
+  
+)
+
 parse_academic_production <- function(key) {
   ## Download using read-only link
   # As seen here: https://stackoverflow.com/questions/42461806/getting-a-csv-read-into-r-though-a-shareable-google-drive-link
