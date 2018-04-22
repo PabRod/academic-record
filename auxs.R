@@ -1,21 +1,41 @@
 get_data <- function(key, save_backup = TRUE)
+  # Gets and cleans the data from my GoogleDrive spreadsheet. Additionally it saves Rda and csv backups.
+  #
+  # Args:
+  #   key: The key string for sharing the content of the data base (I keep it private)
+  #   save_backup (Optional): TRUE/FALSE for saving / not saving backup
+  #
+  # Returns:
+  #   A data frame version of the spreadsheet
   
+  # Try to connect to GoogleDrive data base
   tryCatch(
   {
     data <- parse_academic_production(key)
+    
+    # Save backup if required
     if (save_backup) {
+      # Save as .Rda
       save(data, file=paste(backups_dir, '/backup.Rda', sep =''))
+      
+      # Save as .csv
+      #
+      # Less handy than .Rda, but more readable being plain text
       write.csv(data, file=paste(backups_dir, '/backup.csv', sep =''), fileEncoding='UTF-8')
       
+      # Save an example containing the basic structure
+      #
+      # The GoogleDrive sheet is not public, and it is evolving simultaneously with this project
+      # This file helps keeping track of changes without compromising privacy
       empty_data <- filter(data, Country == 'Unexistent')
       write.csv(empty_data, file=paste(backups_dir, '/example.csv', sep =''), fileEncoding='UTF-8')
     }
     return(data)
   },
-  error = function(cond){
+  error = function(cond){ # If the connection fails, load from latest backup
     message('Unable to access URL. Using backup version')
     
-    load('./backups/backup.Rda')
+    load(paste(backups_dir, '/backup.Rda', sep=''))
     return(data)
   }
   
@@ -80,6 +100,15 @@ plot_map <- function(countries) {
 }
 
 updateHeader <- function(input, output, encoding='utf-8') {
+  # Generates an output markdown file appending the line: 'Modified: {current date}'
+  #
+  # Args:
+  #   input: Input markdown file containing the header.
+  #   output: Output markdown file.
+  #
+  # Returns:
+  #   Void, after creating/updating the file.
+
   new_date <- format(Sys.time(), '%m/%d/%Y, %H:%M:%S')
   date_of_modification <- paste('Modified:', new_date)
   header_base <- readLines(input, encoding = encoding)
