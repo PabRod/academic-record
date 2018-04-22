@@ -95,13 +95,13 @@ Up to date, I've published `r nrow(sci_comm)` science communication essays: `r n
 hist(sci_comm$Date, breaks=20)
 ```
 
-Science communication publications in English:
+### Science communication publications in English
 
 ```{r ScicommEnglish}
 kable(sci_comm_table_en, format='markdown')
 ```
 
-Science communication publications in Spanish:
+### Science communication publications in Spanish
 
 ```{r ScicommTab}
 kable(sci_comm_table_es, format='markdown')

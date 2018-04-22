@@ -95,13 +95,13 @@ A día de hoy, he publicado `r nrow(sci_comm)` artículos breves sobre comunicac
 hist(sci_comm$Date, breaks=20)
 ```
 
-Divulgación científica en inglés:
+### Divulgación científica en inglés
 
 ```{r ScicommEnglish}
 kable(sci_comm_table_en, format='markdown')
 ```
 
-Divulgación científica en español:
+### Divulgación científica en español
 
 ```{r ScicommTab}
 kable(sci_comm_table_es, format='markdown')

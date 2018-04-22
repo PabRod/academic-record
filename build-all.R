@@ -1,4 +1,5 @@
 rm(list = ls())
+library(rmarkdown)
 
 # Update header_with_date.md
 source('config.R')
