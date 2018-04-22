@@ -6,6 +6,9 @@ get_data <- function(key, save_backup = TRUE)
     if (save_backup) {
       save(data, file=paste(backups_dir, '/backup.Rda', sep =''))
       write.csv(data, file=paste(backups_dir, '/backup.csv', sep =''), fileEncoding='UTF-8')
+      
+      empty_data <- filter(data, Country == 'Unexistent')
+      write.csv(empty_data, file=paste(backups_dir, '/example.csv', sep =''), fileEncoding='UTF-8')
     }
     return(data)
   },
