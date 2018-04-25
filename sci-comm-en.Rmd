@@ -52,10 +52,16 @@ sci_comm_table_es <- filter(sci_comm_table, Language == 'Spanish')
 sci_comm_table_es <- select(sci_comm_table_es, -Language)
 ```
 
-Up to date, I've published `r nrow(sci_comm)` science communication essays: `r nrow(sci_comm_table_en)` in English, and `r nrow(sci_comm_table_es)` in Spanish.
+```{r Talks}
+talks <- filter(data, Type == 'Talk')
+talks <- select(talks, Date, NameURL, Institution, Language)
+```
 
-```{r ScicommDates, eval=FALSE}
-hist(sci_comm$Date, breaks=20)
+Up to date, I've given `r nrow(talks)` talks for a general audience. Additionally, I've published `r nrow(sci_comm)` science communication essays: `r nrow(sci_comm_table_en)` in English, and `r nrow(sci_comm_table_es)` in Spanish.
+
+### Talks
+```{r TalksTab}
+kable(talks, format='markdown')
 ```
 
 ### Science communication publications in English

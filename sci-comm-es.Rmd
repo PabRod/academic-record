@@ -52,19 +52,25 @@ sci_comm_table_es <- filter(sci_comm_table, Language == 'Spanish')
 sci_comm_table_es <- select(sci_comm_table_es, -Language)
 ```
 
-A día de hoy, he publicado `r nrow(sci_comm)` artículos breves sobre comunicación científica: `r nrow(sci_comm_table_en)` de ellos en inglés, y `r nrow(sci_comm_table_es)` en español.
-
-```{r ScicommDates, eval=FALSE}
-hist(sci_comm$Date, breaks=20)
+```{r Talks}
+talks <- filter(data, Type == 'Talk')
+talks <- select(talks, Date, NameURL, Institution, Language)
 ```
 
-### Divulgación científica en inglés
+A día de hoy he dado `r nrow(talks)` charlas para público general. Además, he publicado `r nrow(sci_comm)` artículos breves sobre comunicación científica: `r nrow(sci_comm_table_en)` de ellos en inglés, y `r nrow(sci_comm_table_es)` en español.
+
+### Charlas
+```{r TalksTab}
+kable(talks, format='markdown')
+```
+
+### Artículos de divulgación científica en inglés
 
 ```{r ScicommEnglish}
 kable(sci_comm_table_en, format='markdown')
 ```
 
-### Divulgación científica en español
+### Artículos de divulgación científica en español
 
 ```{r ScicommTab}
 kable(sci_comm_table_es, format='markdown')
