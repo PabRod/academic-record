@@ -13,7 +13,7 @@ for (i in 1:n) {
     
     render(inputs[i], 
            output_format = 'md_document', 
-           output_file = output_filenames[1],
+           output_file = output_filenames[i],
            output_dir = output_dir,
            encoding = 'utf-8',
            clean = TRUE)
