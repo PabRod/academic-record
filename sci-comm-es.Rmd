@@ -18,6 +18,7 @@ options(knitr.kable.NA = '')
 
 ```{r Dependencies, warning=FALSE, message=FALSE}
 source('auxs.R')
+source('config.R')
 
 library(knitr)
 library(dplyr)
