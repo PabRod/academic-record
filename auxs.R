@@ -90,6 +90,12 @@ parse_academic_production <- function(key) {
                    )
 }
 
+get_flag <- function(countryName, width=30, height=20) {
+  library(countrycode)
+  code <- countrycode(countryName, origin='country.name', destination='iso2c')
+  
+  flagURL <- sprintf('<img src="http://flagpedia.net/data/flags/mini/%s.png" alt="Drawing" style="width: %dpx; height: %dpx"/>', tolower(code), width, height)
+}
 
 plot_map <- function(countries) {
   library(maptools)

@@ -3,12 +3,12 @@ title: "Academic record"
 author: "Pablo Rodríguez-Sánchez"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
+  html_document:
+    toc: true
   md_document:
     toc: false
     includes:
       in_header: headers/header_with_date.md
-  html_document:
-    toc: true
 ---
 
 ```{r Setup, echo=FALSE}
@@ -19,6 +19,7 @@ options(knitr.kable.NA = '')
 ```{r Dependencies, warning=FALSE, message=FALSE}
 rm(list = ls())
 
+source('config.R')
 source('auxs.R')
 
 library(knitr)
@@ -48,6 +49,7 @@ data_table <- select(data, Date, Name, Type, Language)
 secs <- filter(data, Type == 'Secondment')
 secs <- select(secs, Date, End.date, Institution, Country)
 secs <- mutate(secs, Duration = round(difftime(End.date, Date, units='weeks')))
+secs <- mutate(secs, Country = get_flag(Country))
 
 secs_duration <- sum(secs$Duration)
 ```
@@ -62,6 +64,7 @@ kable(secs, format='markdown')
 ```{r Conferences}
 confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & (Role == 'Attendant' | Role == 'Organizer' | Role == 'Invited speaker' | Role == 'Poster'))
 confs <- select(confs, Date, NameURL, Institution, Role, Country, Language)
+confs <- mutate(confs, Country = get_flag(Country))
 
 confs_num <- nrow(confs)
 ```
