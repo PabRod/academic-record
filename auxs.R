@@ -91,6 +91,15 @@ parse_academic_production <- function(key) {
 }
 
 get_flag <- function(countryName, width=30, height=20) {
+  # Returns the url of a properly formatted national flag. Source: http://flagpedia.net/
+  #
+  # Args:
+  #   countryName: Name(s) of the country or countries (in English)
+  #   width (Optional): Width in px
+  #   heigth (Optional): height in px
+  #
+  # Returns:
+  #   The url of the flag(s)
   library(countrycode)
   code <- countrycode(countryName, origin='country.name', destination='iso2c')
   
