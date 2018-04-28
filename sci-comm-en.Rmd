@@ -1,5 +1,5 @@
 ---
-title: "Scientific communication"
+title: "Public dissemination of science"
 author: "Pablo Rodríguez-Sánchez"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:

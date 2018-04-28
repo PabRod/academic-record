@@ -1,4 +1,4 @@
-Title: Comunicación científica
+Title: Divulgación científica
 Date: 4/12/2018, 11:15:11 AM
 Category: About-me
 Tags: info
