@@ -6,14 +6,9 @@ inputs <- c('sci-comm-en.Rmd',
 config <- data.frame(inputs)
 
 # Corresponding headers (w/o "Modified" metadata)
-config$headers <- c('headers/base_sci-comm_en.md',
-             'headers/base_sci-comm_es.md',
-             'headers/base_education_en.md')
-
-# Render only if active
-config$active <- c(TRUE,
-            TRUE,
-            TRUE)
+config$headers <- c('headers/sci-comm-en.md',
+             'headers/sci-comm-es.md',
+             'headers/education-en.md')
 
 # Output formats
 config$output_formats <- c('md_document',
@@ -26,6 +21,11 @@ config$output_filenames <- c(NULL,
                      NULL,
                      NULL)
 
+# Render only if active
+config$active <- c(TRUE,
+                   TRUE,
+                   TRUE)
+
 # Backups location
 config$backups_dir <- './backups'
 
@@ -33,4 +33,4 @@ config$backups_dir <- './backups'
 config$output_dir <- '../../content/pages'
 
 # Temporary header location
-config$hdr_temp <- 'headers/hdr_temp.md'
+config$hdr_temp <- 'headers/temp.md'
