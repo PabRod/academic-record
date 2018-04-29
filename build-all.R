@@ -5,19 +5,19 @@ library(rmarkdown)
 source('config.R')
 source('auxs.R')
 
-n <- length(inputs)
+n <- length(config$inputs)
 
 for (i in 1:n) {
-  if (active[i]) {
-    updateHeader(headers[i], hdr_temp)
+  if (config$active[i]) {
+    updateHeader(config$headers[i], config$hdr_temp[i])
     
     render(inputs[i], 
-           output_format = 'md_document', 
-           output_file = output_filenames[i],
-           output_dir = output_dir,
+           output_format = config$output_formats[i], 
+           output_file = config$output_filenames[i],
+           output_dir = config$output_dir[i],
            encoding = 'utf-8',
            clean = TRUE)
     
-    file.remove(hdr_temp)
+    file.remove(config$hdr_temp[i])
   }
 }

@@ -16,19 +16,19 @@ get_data <- function(key, save_backup = TRUE)
     # Save backup if required
     if (save_backup) {
       # Save as .Rda
-      save(data, file=paste(backups_dir, '/backup.Rda', sep =''))
+      save(data, file=paste(config$backups_dir[1], '/backup.Rda', sep =''))
       
       # Save as .csv
       #
       # Less handy than .Rda, but more readable being plain text
-      write.csv(data, file=paste(backups_dir, '/backup.csv', sep =''), fileEncoding='UTF-8')
+      write.csv(data, file=paste(config$backups_dir[1], '/backup.csv', sep =''), fileEncoding='UTF-8')
       
       # Save an example containing the basic structure
       #
       # The GoogleDrive sheet is not public, and it is evolving simultaneously with this project
       # This file helps keeping track of changes without compromising privacy
       empty_data <- filter(data, Country == 'Unexistent')
-      write.csv(empty_data, file=paste(backups_dir, '/example.csv', sep =''), fileEncoding='UTF-8')
+      write.csv(empty_data, file=paste(config$backups_dir[1], '/example.csv', sep =''), fileEncoding='UTF-8')
     }
     return(data)
   },
