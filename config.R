@@ -6,9 +6,7 @@ inputs <- c('sci-comm-en.Rmd',
 config <- data.frame(inputs)
 
 # Corresponding headers (w/o "Modified" metadata)
-config$headers <- c('headers/sci-comm-en.md',
-             'headers/sci-comm-es.md',
-             'headers/education-en.md')
+config$headers <- paste('headers/', gsub('.Rmd', '.md', inputs), sep='') # Takes the names from the input
 
 # Output formats
 config$output_formats <- c('md_document',
