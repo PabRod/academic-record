@@ -55,7 +55,7 @@ talks <- select(talks, Date, NameURL, Institution, Language)
 ```
 
 ```{r Other}
-other <- filter(data, Type == 'Interview' | Type == 'Podcast')
+other <- filter(data, Type == 'Interview' | Type == 'Podcast' | Type == 'TV' | Type == 'Radio')
 other_table <- select(other, Date, NameURL, Type, Role, Institution, Language)
 ```
 
