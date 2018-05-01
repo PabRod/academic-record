@@ -39,7 +39,7 @@ data <- filter(data, Date < today())
 ```
 
 ```{r Filter, warning=FALSE}
-data_table <- select(data, Date, Name, Type, Language)
+data_table <- select(data, Date, Name, Type, Role, Language)
 ```
 
 ```{r Scicomm}
@@ -56,6 +56,11 @@ sci_comm_table_es <- select(sci_comm_table_es, -Language)
 ```{r Talks}
 talks <- filter(data, Type == 'Talk')
 talks <- select(talks, Date, NameURL, Institution, Language)
+```
+
+```{r Other}
+other <- filter(data, Type == 'Interview' | Type == 'Podcast')
+other_table <- select(other, Date, NameURL, Type, Role, Institution, Language)
 ```
 
 A día de hoy he dado `r nrow(talks)` charlas para público general. Además, he publicado `r nrow(sci_comm)` artículos breves sobre comunicación científica: `r nrow(sci_comm_table_en)` de ellos en inglés, y `r nrow(sci_comm_table_es)` en español.
@@ -75,6 +80,11 @@ kable(sci_comm_table_en, format='markdown')
 
 ```{r ScicommTab}
 kable(sci_comm_table_es, format='markdown')
+```
+
+### Otros
+```{r Others tab}
+kable(other_table, format='markdown')
 ```
 
 ```{r ScicommDist, eval=FALSE}

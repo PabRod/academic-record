@@ -39,7 +39,7 @@ data <- filter(data, Date < today())
 ```
 
 ```{r Filter, warning=FALSE}
-data_table <- select(data, Date, Name, Type, Language)
+data_table <- select(data, Date, Name, Type, Role, Language)
 ```
 
 ```{r Scicomm}
@@ -56,6 +56,11 @@ sci_comm_table_es <- select(sci_comm_table_es, -Language)
 ```{r Talks}
 talks <- filter(data, Type == 'Talk')
 talks <- select(talks, Date, NameURL, Institution, Language)
+```
+
+```{r Other}
+other <- filter(data, Type == 'Interview' | Type == 'Podcast')
+other_table <- select(other, Date, NameURL, Type, Role, Institution, Language)
 ```
 
 Up to date, I've given `r nrow(talks)` talks for a general audience. Additionally, I've published `r nrow(sci_comm)` science communication essays: `r nrow(sci_comm_table_en)` in English, and `r nrow(sci_comm_table_es)` in Spanish.
@@ -75,6 +80,11 @@ kable(sci_comm_table_en, format='markdown')
 
 ```{r ScicommTab}
 kable(sci_comm_table_es, format='markdown')
+```
+
+### Others
+```{r Others tab}
+kable(other_table, format='markdown')
 ```
 
 ```{r ScicommDist, eval=FALSE}
