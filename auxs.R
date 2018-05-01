@@ -35,7 +35,7 @@ get_data <- function(key, save_backup = TRUE)
   error = function(cond){ # If the connection fails, load from latest backup
     message('Unable to access URL. Using backup version')
     
-    load(paste(backups_dir, '/backup.Rda', sep=''))
+    load(paste(config$backups_dir[1], '/backup.Rda', sep=''))
     return(data)
   }
   
