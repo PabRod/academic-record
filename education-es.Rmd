@@ -1,0 +1,124 @@
+---
+title: "Estudios"
+author: "Pablo Rodríguez-Sánchez"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+  md_document:
+    toc: false
+    includes:
+      in_header: headers/temp.md
+---
+
+```{r Setup, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+options(knitr.kable.NA = '')
+```
+
+```{r Dependencies, warning=FALSE, message=FALSE}
+source('config.R')
+source('auxs.R')
+
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(readr)
+library(sp)
+```
+
+
+```{r Load, warning=FALSE, message=FALSE}
+key <- read_file('key.txt')
+data <- get_data(key, save_backup = TRUE)
+```
+
+```{r FilterFuture}
+data <- filter(data, Date < today())
+```
+
+```{r Filter, warning=FALSE}
+data_table <- select(data, Date, Name, Type, Language)
+```
+
+## Estudios reglados
+```{r Formal}
+formal <- filter(data, Type == 'Regular_studies')
+formal <- select(formal, Name, Date, End.date, Institution, Country)
+formal <- mutate(formal, Country = get_flag(Country))
+```
+
+```{r FormalTab}
+kable(formal, format='markdown')
+```
+
+## Estancias
+```{r Secondments}
+secs <- filter(data, Type == 'Secondment')
+secs <- select(secs, Date, End.date, Institution, Country)
+secs <- mutate(secs, Duration = round(difftime(End.date, Date, units='weeks')))
+secs <- mutate(secs, Country = get_flag(Country))
+
+secs_duration <- sum(secs$Duration)
+```
+
+He pasado `r secs_duration` semanas en las siguientes estancias internacionales:
+
+```{r SecondmentsTab}
+kable(secs, format='markdown')
+```
+
+## Conferencias y talleres
+```{r Conferences}
+confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & (Role == 'Attendant' | Role == 'Organizer' | Role == 'Invited speaker' | Role == 'Poster'))
+confs <- select(confs, Date, NameURL, Institution, Role, Country, Language)
+confs <- mutate(confs, Country = get_flag(Country))
+
+confs_num <- nrow(confs)
+```
+
+He participado en `r confs_num` conferencias, congresos y talleres:
+
+```{r ConferencesTab}
+kable(confs, format='markdown')
+```
+
+## Charlas
+```{r Talks}
+talks <- filter(data, Type != 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
+talks <- select(talks, Date, NameURL, Type, Institution, Language)
+
+talks_num <- nrow(talks)
+```
+
+He dado `r talks_num` charlas:
+
+```{r TalksTab}
+kable(talks, format='markdown')
+```
+
+## Docencia
+```{r Classes}
+classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
+classes <- select(classes, Date, End.date, Name, Role, Institution, Language)
+
+classes_num <- nrow(classes)
+```
+
+He participado en la docencia de `r classes_num` cursos:
+
+```{r ClassesTab}
+kable(classes, format='markdown')
+```
+
+```{r Books, eval=FALSE}
+## Books and book chapters
+books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
+books <- select(books, Date, Name, Institution, Language)
+kable(books, format='markdown')
+```
+
+***
+
+Built with R `r getRversion()` and RStudio.
