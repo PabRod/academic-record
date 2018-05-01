@@ -31,11 +31,7 @@ library(sp)
 
 ```{r Load, warning=FALSE, message=FALSE}
 key <- read_file('key.txt')
-data <- get_data(key, save_backup = TRUE)
-```
-
-```{r FilterFuture}
-data <- filter(data, Date < today())
+data <- get_data(key, save_backup = TRUE, ignore_future = TRUE)
 ```
 
 ```{r Filter, warning=FALSE}

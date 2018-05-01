@@ -1,9 +1,10 @@
-get_data <- function(key, save_backup = TRUE)
+get_data <- function(key, save_backup = TRUE, ignore_future = TRUE)
   # Gets and cleans the data from my GoogleDrive spreadsheet. Additionally it saves Rda and csv backups.
   #
   # Args:
   #   key: The key string for sharing the content of the data base (I keep it private)
   #   save_backup (Optional): TRUE/FALSE for saving / not saving backup
+  #   ignore_future (Optional): TRUE for filtering out future publications/entries
   #
   # Returns:
   #   A data frame version of the spreadsheet
@@ -30,6 +31,17 @@ get_data <- function(key, save_backup = TRUE)
       empty_data <- filter(data, Country == 'Unexistent')
       write.csv(empty_data, file=paste(config$backups_dir[1], '/example.csv', sep =''), fileEncoding='UTF-8')
     }
+    
+    # Arrange by descending date
+    library(dplyr)
+    data <- arrange(data, desc(Date))
+    
+    # Filter future if required
+    if(ignore_future) {
+      library(lubridate)
+      data <- filter(data, Date < today())
+    }
+    
     return(data)
   },
   error = function(cond){ # If the connection fails, load from latest backup
