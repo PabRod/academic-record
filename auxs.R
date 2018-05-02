@@ -126,6 +126,17 @@ plot_map <- function(countries) {
   plot(wrld_simpl, xlim = c(0,10), ylim = c(35,60), bg='lightblue', col = c('lightgrey', 'olivedrab3')[myCountries+1])
 }
 
+plot_cities <- function(data) {
+  library(maps)
+  library(dplyr)
+  
+  data(world.cities)
+  visited.cities <- filter(world.cities, is.element(name, data$City) & is.element(country.etc, data$Country))
+  
+  map('world', xlim = c(-20, 40), ylim = c(35, 60), bg = 'lightblue', interior = TRUE, fill = TRUE, col = 'lightgray')
+  map.cities(visited.cities, label = FALSE, pch = '.', cex = 10, col = 'red')
+}
+
 updateHeader <- function(input, output, encoding='utf-8') {
   # Generates an output markdown file appending the line: 'Modified: {current date}'
   #

@@ -115,6 +115,10 @@ books <- select(books, Date, Name, Institution, Language)
 kable(books, format='markdown')
 ```
 
+```{r Map, eval=FALSE}
+plot_cities(data)
+```
+
 ***
 
 Built with R `r getRversion()` and RStudio.
