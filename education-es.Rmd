@@ -97,7 +97,7 @@ kable(talks, format='markdown')
 ## Docencia
 ```{r Classes}
 classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
-classes <- select(classes, Date, End.date, Name, Role, Institution, Language)
+classes <- select(classes, Date, End.date, NameURL, Role, Institution, Language)
 
 classes_num <- nrow(classes)
 ```
