@@ -8,22 +8,22 @@ get_data <- function(key, save_backup = TRUE, ignore_future = TRUE)
   #
   # Returns:
   #   A data frame version of the spreadsheet
-  
+
   # Try to connect to GoogleDrive data base
   tryCatch(
   {
     data <- parse_academic_production(key)
-    
+
     # Save backup if required
     if (save_backup) {
       # Save as .Rda
       save(data, file=paste(config$backups_dir[1], '/backup.Rda', sep =''))
-      
+
       # Save as .csv
       #
       # Less handy than .Rda, but more readable being plain text
       write.csv(data, file=paste(config$backups_dir[1], '/backup.csv', sep =''), fileEncoding='UTF-8')
-      
+
       # Save an example containing the basic structure
       #
       # The GoogleDrive sheet is not public, and it is evolving simultaneously with this project
@@ -31,71 +31,71 @@ get_data <- function(key, save_backup = TRUE, ignore_future = TRUE)
       empty_data <- filter(data, Country == 'Unexistent')
       write.csv(empty_data, file=paste(config$backups_dir[1], '/example.csv', sep =''), fileEncoding='UTF-8')
     }
-    
+
     # Arrange by descending date
     library(dplyr)
     data <- arrange(data, desc(Date))
-    
+
     # Filter future if required
     if(ignore_future) {
       library(lubridate)
-      data <- filter(data, Date < today())
+      data <- filter(data, Date <= today())
     }
-    
+
     return(data)
   },
   error = function(cond){ # If the connection fails, load from latest backup
     message('Unable to access URL. Using backup version')
-    
+
     load(paste(config$backups_dir[1], '/backup.Rda', sep=''))
     return(data)
   }
-  
+
 )
 
 parse_academic_production <- function(key) {
   ## Download using read-only link
   # As seen here: https://stackoverflow.com/questions/42461806/getting-a-csv-read-into-r-though-a-shareable-google-drive-link
-  
+
   ## Load required libraries
   library(dplyr)
   library(lubridate)
-  
+
   ## Download the data
   sheet <- "Hoja 1"
   link <- sprintf("https://docs.google.com/spreadsheets/d/%s/gviz/tq?tqx=out:csv&sheet={%s}", key, sheet)
   raw <- read.csv(link, encoding='UTF-8', dec=',')
-  
+
   ## Clean the data
   tidy <- raw # By default, everything is understood as a factor
-  
+
   # Read dates
-  tidy <- mutate(tidy, 
+  tidy <- mutate(tidy,
                  Date = dmy(Date),
                  End.date = dmy(End.date),
                  Pay.day = dmy(Pay.day))
-  
+
   # Read text
   tidy <- mutate(tidy,
                  Name = as.character(Name),
                  URL = as.character(URL),
                  Author = as.character(Author))
-  
+
   # Read geographical information
   tidy <- mutate(tidy,
                  City = as.character(City),
                  Country = as.character(Country))
-  
+
   # Read numbers
-  tidy <- mutate(tidy, 
+  tidy <- mutate(tidy,
                  ECTS = as.numeric(ECTS))
-  
+
   # Read money
-  tidy <- mutate(tidy, 
+  tidy <- mutate(tidy,
                  Amount = as.numeric(Amount))
-  
+
   # Combine name and URL in a clickable string for electronic publications
-  tidy <- mutate(tidy, 
+  tidy <- mutate(tidy,
                  NameURL = case_when(
                    URL == "" ~ Name,
                    URL != "" ~ paste0("[", Name, "](", URL, ")"))
@@ -114,13 +114,13 @@ get_flag <- function(countryName, width=30, height=20) {
   #   The url of the flag(s)
   library(countrycode)
   code <- countrycode(countryName, origin='country.name', destination='iso2c')
-  
+
   flagURL <- sprintf('<img src="http://flagpedia.net/data/flags/mini/%s.png" alt="Drawing" style="width: %dpx; height: %dpx"/>', tolower(code), width, height)
 }
 
 plot_map <- function(countries) {
   library(maptools)
-  
+
   data(wrld_simpl)
   myCountries = wrld_simpl@data$NAME %in% countries
   plot(wrld_simpl, xlim = c(0,10), ylim = c(35,60), bg='lightblue', col = c('lightgrey', 'olivedrab3')[myCountries+1])
@@ -129,10 +129,10 @@ plot_map <- function(countries) {
 plot_cities <- function(data) {
   library(maps)
   library(dplyr)
-  
+
   data(world.cities)
   visited.cities <- filter(world.cities, is.element(name, data$City) & is.element(country.etc, data$Country))
-  
+
   map('world', xlim = c(-20, 40), ylim = c(35, 60), bg = 'lightblue', interior = TRUE, fill = TRUE, col = 'lightgray')
   map.cities(visited.cities, label = FALSE, pch = '.', cex = 10, col = 'red')
 }
