@@ -94,27 +94,6 @@ I've given `r talks_num` talks:
 kable(talks, format='markdown')
 ```
 
-## Teaching
-```{r Classes}
-classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
-classes <- select(classes, Date, End.date, NameURL, Role, Institution, Language)
-
-classes_num <- nrow(classes)
-```
-
-I've been involved in the teaching of `r classes_num` courses:
-
-```{r ClassesTab}
-kable(classes, format='markdown')
-```
-
-```{r Books, eval=FALSE}
-## Books and book chapters
-books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
-books <- select(books, Date, Name, Institution, Language)
-kable(books, format='markdown')
-```
-
 ```{r Map, eval=FALSE}
 plot_cities(data)
 ```

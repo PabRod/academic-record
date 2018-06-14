@@ -94,27 +94,6 @@ He dado `r talks_num` charlas:
 kable(talks, format='markdown')
 ```
 
-## Docencia
-```{r Classes}
-classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
-classes <- select(classes, Date, End.date, NameURL, Role, Institution, Language)
-
-classes_num <- nrow(classes)
-```
-
-He participado en la docencia de `r classes_num` cursos:
-
-```{r ClassesTab}
-kable(classes, format='markdown')
-```
-
-```{r Books, eval=FALSE}
-## Books and book chapters
-books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
-books <- select(books, Date, Name, Institution, Language)
-kable(books, format='markdown')
-```
-
 ```{r Map, eval=FALSE}
 plot_cities(data)
 ```
