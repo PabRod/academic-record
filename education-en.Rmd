@@ -59,7 +59,7 @@ secs <- mutate(secs, Country = get_flag(Country))
 secs_duration <- sum(secs$Duration)
 ```
 
-I've spent `r secs_duration` weeks in secondments, distributed as the following:
+I had the following secondments in other institutions:
 
 ```{r SecondmentsTab}
 kable(secs, format='markdown')

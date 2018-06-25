@@ -59,7 +59,7 @@ secs <- mutate(secs, Country = get_flag(Country))
 secs_duration <- sum(secs$Duration)
 ```
 
-He pasado `r secs_duration` semanas en las siguientes estancias internacionales:
+He tenido la oportunidad de realizar las siguientes estancias internacionales:
 
 ```{r SecondmentsTab}
 kable(secs, format='markdown')
