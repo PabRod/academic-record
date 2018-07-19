@@ -22,3 +22,4 @@ for (i in 1:n) {
     file.remove(config$hdr_temp[i]) # Remove temporary file used for including current date and time in the header
   }
 }
+

@@ -4,7 +4,9 @@ inputs <- c('sci-comm-en.Rmd',
            'education-en.Rmd',
            'education-es.Rmd',
            'teaching-en.Rmd',
-           'teaching-es.Rmd')
+           'teaching-es.Rmd',
+           'publications-en.Rmd',
+           'publications-es.Rmd')
 
 config <- data.frame(inputs)
 
@@ -17,6 +19,8 @@ config$output_formats <- c('md_document',
                     'md_document',
                     'md_document',
                     'md_document',
+                    'md_document',
+                    'md_document',
                     'md_document')
 
 # Output filenames (NULL for default: name.Rmd -> name.md)
@@ -25,10 +29,14 @@ config$output_filenames <- c(NULL,
                      NULL,
                      NULL,
                      NULL,
+                     NULL,
+                     NULL,
                      NULL)
 
 # Render only if active
 config$active <- c(TRUE,
+                   TRUE,
+                   TRUE,
                    TRUE,
                    TRUE,
                    TRUE,

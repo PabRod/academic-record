@@ -1,0 +1,70 @@
+---
+title: "Publications"
+author: "Pablo Rodríguez-Sánchez"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+  md_document:
+    toc: false
+    includes:
+      in_header: headers/temp.md
+---
+
+```{r Setup, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+options(knitr.kable.NA = '')
+```
+
+```{r Dependencies, warning=FALSE, message=FALSE}
+source('config.R')
+source('auxs.R')
+
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(readr)
+library(sp)
+```
+
+
+```{r Load, warning=FALSE, message=FALSE}
+key <- read_file('key.txt')
+data <- get_data(key, save_backup = TRUE, ignore_future = TRUE)
+```
+
+```{r Filter, warning=FALSE}
+data_table <- select(data, Date, Name, Type, Language)
+```
+## Preprints
+```{r Preprints}
+preprints <- filter(data, Type == 'Preprint')
+preprints <- select(preprints, Date, NameURL, Role)
+
+preprints_num <- nrow(preprints)
+```
+
+I have `r preprints_num` preprint(s) waiting to be published:
+
+```{r PreprintsTab}
+kable(preprints, format='markdown')
+```
+
+## Scientific code
+```{r Code}
+code <- filter(data, Type == 'Code')
+code <- select(code, Date, NameURL, Role)
+
+code_num <- nrow(code)
+```
+
+I made available `r code_num` of my small projects about scientific software:
+
+```{r CodeTab}
+kable(code, format='markdown')
+```
+
+***
+
+Built with R `r getRversion()` and RStudio.
