@@ -68,7 +68,7 @@ kable(secs, format='markdown')
 ## Conferencias y talleres
 ```{r Conferences}
 confs <- filter(data, (Type == 'Congress' | Type == 'Workshop') & (Role == 'Attendant' | Role == 'Organizer' | Role == 'Invited speaker' | Role == 'Contributed speaker' | Role == 'Poster'))
-confs <- select(confs, Date, NameURL, Institution, Role, Country, Language)
+confs <- select(confs, Date, NameURL, Institution, Role, Country)
 confs <- mutate(confs, Country = get_flag(Country))
 
 confs_num <- nrow(confs)
@@ -83,7 +83,7 @@ kable(confs, format='markdown')
 ## Charlas
 ```{r Talks}
 talks <- filter(data, Type != 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
-talks <- select(talks, Date, NameURL, Type, Institution, Language)
+talks <- select(talks, Date, NameURL, Type, Institution)
 
 talks_num <- nrow(talks)
 ```
