@@ -41,7 +41,8 @@ data_table <- select(data, Date, Name, Type, Language)
 ## Docencia
 ```{r Classes}
 classes <- filter(data, Type == 'Course' & (Role == 'Teacher' | Role == 'Teaching assistant'))
-classes <- select(classes, Date, End.date, NameURL, Role, Institution)
+classes <- select(classes, Date, End.date, NameURL, Role, Institution, Country)
+classes <- mutate(classes, Country = get_flag(Country))
 
 classes_num <- nrow(classes)
 ```
