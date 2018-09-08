@@ -115,7 +115,7 @@ get_flag <- function(countryName, width=30, height=20) {
   library(countrycode)
   code <- countrycode(countryName, origin='country.name', destination='iso2c')
 
-  flagURL <- sprintf('<img src="http://flagpedia.net/data/flags/mini/%s.png" alt="Drawing" style="width: %dpx; height: %dpx"/>', tolower(code), width, height)
+  flagURL <- sprintf('<img src="http://flagpedia.net/data/flags/mini/%s.png" alt="Drawing" title="%s" style="width: %dpx; height: %dpx"/>', tolower(code), countryName, width, height)
 }
 
 plot_map <- function(countries) {
