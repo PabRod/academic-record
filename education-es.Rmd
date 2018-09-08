@@ -83,7 +83,8 @@ kable(confs, format='markdown')
 ## Charlas
 ```{r Talks}
 talks <- filter(data, Type != 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
-talks <- select(talks, Date, NameURL, Type, Institution)
+talks <- select(talks, Date, NameURL, Type, Institution, Country)
+talks <- mutate(talks, Country = get_flag(Country))
 
 talks_num <- nrow(talks)
 ```
