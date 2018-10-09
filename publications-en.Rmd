@@ -54,7 +54,7 @@ kable(preprints, format='markdown')
 ## Scientific code
 ```{r Code}
 code <- filter(data, Type == 'Code')
-code <- select(code, Date, NameURL, Role)
+code <- select(code, Date, NameURL, Role, Language)
 
 code_num <- nrow(code)
 ```
