@@ -52,13 +52,6 @@ I've been involved in the teaching of `r classes_num` courses:
 kable(classes, format='markdown')
 ```
 
-```{r Books, eval=FALSE}
-## Books and book chapters
-books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
-books <- select(books, Date, Name, Institution, Language)
-kable(books, format='markdown')
-```
-
 ***
 
 Built with R `r getRversion()` and RStudio.

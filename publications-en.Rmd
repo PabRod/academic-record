@@ -51,6 +51,22 @@ I have `r preprints_num` preprint(s) waiting to be published:
 kable(preprints, format='markdown')
 ```
 
+## Books
+
+```{r Books}
+## Books and book chapters
+books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
+books <- select(books, Date, Name, Role, Institution)
+
+books_num <- nrow(books)
+```
+
+I've been involved in the redaction of `r books_num` book:
+
+```{r BooksTab}
+kable(books, format='markdown')
+```
+
 ## Scientific code
 ```{r Code}
 code <- filter(data, Type == 'Code')

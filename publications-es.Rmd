@@ -51,6 +51,22 @@ Tengo `r preprints_num` preimpresiones esperando a ser publicadas:
 kable(preprints, format='markdown')
 ```
 
+## Libros
+
+```{r Books}
+## Books and book chapters
+books <- filter(data, Type == 'Book' & (Role == 'Chapter author' | Role == 'Author'))
+books <- select(books, Date, Name, Role, Institution)
+
+books_num <- nrow(books)
+```
+
+He participado en la redacción de `r books_num` libro:
+
+```{r BooksTab}
+kable(books, format='markdown')
+```
+
 ## Software científico
 ```{r Code}
 code <- filter(data, Type == 'Code')
