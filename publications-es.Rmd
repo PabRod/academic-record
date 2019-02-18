@@ -48,7 +48,7 @@ preprints_num <- nrow(preprints)
 Tengo `r preprints_num` preimpresiones esperando a ser publicadas:
 
 ```{r PreprintsTab}
-kable(preprints, format='markdown')
+kable(preprints, format='pandoc')
 ```
 
 ## Libros
@@ -64,7 +64,7 @@ books_num <- nrow(books)
 He participado en la redacción de `r books_num` libro:
 
 ```{r BooksTab}
-kable(books, format='markdown')
+kable(books, format='pandoc')
 ```
 
 ## Software científico
@@ -78,7 +78,7 @@ code_num <- nrow(code)
 He publicado `r code_num` pequeños proyectos de software científico:
 
 ```{r CodeTab}
-kable(code, format='markdown')
+kable(code, format='pandoc')
 ```
 
 ***

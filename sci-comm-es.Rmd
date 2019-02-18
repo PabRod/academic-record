@@ -63,24 +63,24 @@ A día de hoy he dado `r nrow(talks)` charlas para público general. Además, he
 
 ### Charlas
 ```{r TalksTab}
-kable(talks, format='markdown')
+kable(talks, format='pandoc')
 ```
 
 ### Artículos de divulgación científica en inglés
 
 ```{r ScicommEnglish}
-kable(sci_comm_table_en, format='markdown')
+kable(sci_comm_table_en, format='pandoc')
 ```
 
 ### Artículos de divulgación científica en español
 
 ```{r ScicommTab}
-kable(sci_comm_table_es, format='markdown')
+kable(sci_comm_table_es, format='pandoc')
 ```
 
 ### Otros
 ```{r Others tab}
-kable(other_table, format='markdown')
+kable(other_table, format='pandoc')
 ```
 
 ```{r ScicommDist, eval=FALSE}

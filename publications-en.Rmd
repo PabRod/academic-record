@@ -48,7 +48,7 @@ preprints_num <- nrow(preprints)
 I have `r preprints_num` preprint(s) waiting to be published:
 
 ```{r PreprintsTab}
-kable(preprints, format='markdown')
+kable(preprints, format='pandoc')
 ```
 
 ## Books
@@ -64,7 +64,7 @@ books_num <- nrow(books)
 I've been involved in the redaction of `r books_num` book:
 
 ```{r BooksTab}
-kable(books, format='markdown')
+kable(books, format='pandoc')
 ```
 
 ## Scientific code
@@ -78,7 +78,7 @@ code_num <- nrow(code)
 I made available `r code_num` of my small projects about scientific software:
 
 ```{r CodeTab}
-kable(code, format='markdown')
+kable(code, format='pandoc')
 ```
 
 ***
