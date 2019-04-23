@@ -81,6 +81,21 @@ I made available `r code_num` of my small projects about scientific software:
 kable(code, format='pandoc')
 ```
 
+
+## Coautorships
+```{r Coauthor}
+coauth <- filter(data, Type == 'Article' & Role == 'Coauthor')
+coauth <- select(coauth, Date, NameURL, Author, Publisher)
+
+coauth_num <- nrow(coauth)
+```
+
+I've been coauthor in `r coauth_num` paper:
+
+```{r CoauthTab}
+kable(coauth, format='pandoc')
+```
+
 ***
 
 Built with R `r getRversion()` and RStudio.

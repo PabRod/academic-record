@@ -81,6 +81,21 @@ He publicado `r code_num` pequeños proyectos de software científico:
 kable(code, format='pandoc')
 ```
 
+
+## Coautorías
+```{r Coauthor}
+coauth <- filter(data, Type == 'Article' & Role == 'Coauthor')
+coauth <- select(coauth, Date, NameURL, Author, Publisher)
+
+coauth_num <- nrow(coauth)
+```
+
+Soy coautor de `r coauth_num` publicación:
+
+```{r CoauthTab}
+kable(coauth, format='pandoc')
+```
+
 ***
 
 Built with R `r getRversion()` and RStudio.
