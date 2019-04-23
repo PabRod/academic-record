@@ -84,7 +84,7 @@ kable(code, format='pandoc')
 
 ## Coautorías
 ```{r Coauthor}
-coauth <- filter(data, Type == 'Article' & Role == 'Coauthor')
+coauth <- filter(data, Type == 'Research article' & Role == 'Coauthor')
 coauth <- select(coauth, Date, NameURL, Author, Publisher)
 
 coauth_num <- nrow(coauth)
