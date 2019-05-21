@@ -51,6 +51,21 @@ I have `r preprints_num` preprint(s) waiting to be published:
 kable(preprints, format='pandoc')
 ```
 
+## Coautorships
+
+```{r Coauthor}
+coauth <- filter(data, Type == 'Paper' & Role == 'Coauthor')
+coauth <- select(coauth, Date, NameURL, Author, Publisher)
+
+coauth_num <- nrow(coauth)
+```
+
+I've been coauthor in `r coauth_num` paper:
+
+```{r CoauthTab}
+kable(coauth, format='pandoc')
+```
+
 ## Books
 
 ```{r Books}
@@ -82,19 +97,7 @@ kable(code, format='pandoc')
 ```
 
 
-## Coautorships
-```{r Coauthor}
-coauth <- filter(data, Type == 'Research article' & Role == 'Coauthor')
-coauth <- select(coauth, Date, NameURL, Author, Publisher)
 
-coauth_num <- nrow(coauth)
-```
-
-I've been coauthor in `r coauth_num` paper:
-
-```{r CoauthTab}
-kable(coauth, format='pandoc')
-```
 
 ***
 

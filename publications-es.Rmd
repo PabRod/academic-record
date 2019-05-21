@@ -51,6 +51,20 @@ Tengo `r preprints_num` preimpresiones esperando a ser publicadas:
 kable(preprints, format='pandoc')
 ```
 
+## Coautorías
+```{r Coauthor}
+coauth <- filter(data, Type == 'Paper' & Role == 'Coauthor')
+coauth <- select(coauth, Date, NameURL, Author, Publisher)
+
+coauth_num <- nrow(coauth)
+```
+
+Soy coautor de `r coauth_num` publicación:
+
+```{r CoauthTab}
+kable(coauth, format='pandoc')
+```
+
 ## Libros
 
 ```{r Books}
@@ -79,21 +93,6 @@ He publicado `r code_num` pequeños proyectos de software científico:
 
 ```{r CodeTab}
 kable(code, format='pandoc')
-```
-
-
-## Coautorías
-```{r Coauthor}
-coauth <- filter(data, Type == 'Research article' & Role == 'Coauthor')
-coauth <- select(coauth, Date, NameURL, Author, Publisher)
-
-coauth_num <- nrow(coauth)
-```
-
-Soy coautor de `r coauth_num` publicación:
-
-```{r CoauthTab}
-kable(coauth, format='pandoc')
 ```
 
 ***
