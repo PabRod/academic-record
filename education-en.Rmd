@@ -80,25 +80,6 @@ I've attended `r confs_num` congresses and workshops:
 kable(confs, format='pandoc')
 ```
 
-## Talks
-```{r Talks}
-talks <- filter(data, Type != 'Course' & (Role == 'Speaker' | Role == 'Teaching assistant'))
-talks <- select(talks, Date, NameURL, Type, Institution, Country)
-talks <- mutate(talks, Country = get_flag(Country))
-
-talks_num <- nrow(talks)
-```
-
-I've given `r talks_num` talks:
-
-```{r TalksTab}
-kable(talks, format='pandoc')
-```
-
-```{r Map, eval=FALSE}
-plot_cities(data)
-```
-
 ***
 
 Built with R `r getRversion()` and RStudio.
