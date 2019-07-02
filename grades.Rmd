@@ -2,7 +2,9 @@
 title: "Grades translation"
 author: "Pablo Rodríguez-Sánchez"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: pdf_document
+output: 
+  pdf_document:
+    keep_tex: true
 ---
 
 
