@@ -1,0 +1,41 @@
+---
+title: "Grades translation"
+author: "Pablo Rodríguez-Sánchez"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: pdf_document
+---
+
+
+```{r Setup, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE)
+options(knitr.kable.NA = '')
+```
+
+```{r Dependencies, warning=FALSE, message=FALSE}
+source('config.R')
+source('auxs.R')
+
+library(knitr)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(readr)
+library(sp)
+```
+
+
+```{r Load, warning=FALSE, message=FALSE}
+key <- read_file('key_grades.txt')
+data <- parse_grades(key)
+```
+
+```{r Filter, warning=FALSE}
+data_1 <- filter(data, Course == 'First')
+data_table <- select(data, Nombre, Nota, ECTS, Name , Grade)
+```
+
+```{r Tabulate}
+kable(data_table, format = 'latex', booktabs = TRUE, longtable = TRUE) %>% kable_styling(latex_options = c("hold_position", "repeat_header")) %>% add_header_above(c("Spanish" = 2, " " = 1, "English" = 2))
+```
+
+

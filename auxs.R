@@ -102,6 +102,30 @@ parse_academic_production <- function(key) {
                    )
 }
 
+parse_grades <- function(key_grades) {
+  ## Download using read-only link
+  # As seen here: https://stackoverflow.com/questions/42461806/getting-a-csv-read-into-r-though-a-shareable-google-drive-link
+  
+  ## Load required libraries
+  library(dplyr)
+  library(lubridate)
+  
+  ## Download the data
+  sheet <- "Hoja 1"
+  link <- sprintf("https://docs.google.com/spreadsheets/d/%s/gviz/tq?tqx=out:csv&sheet={%s}", key, sheet)
+  raw <- read.csv(link, encoding='UTF-8', dec=',')
+  
+  ## Clean the data
+  tidy <- raw # By default, everything is understood as a factor
+  
+  # Read text
+  tidy <- mutate(tidy,
+                 Nombre = as.character(Nombre),
+                 Name = as.character(Name),
+                 Course = as.character(Course),
+                 Grade = as.character(Grade))
+}
+
 get_flag <- function(countryName, width=30, height=20) {
   # Returns the url of a properly formatted national flag. Source: http://flagpedia.net/
   #
