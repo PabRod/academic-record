@@ -4,6 +4,7 @@ Category: About-me
 Tags: info
 Slug: sci-comm
 Lang: es
+Status: hidden
 Translation: True
 Authors: Pablo Rodríguez-Sánchez
 Summary: Actividades y publicaciones relacionadas con la comunicación científica
