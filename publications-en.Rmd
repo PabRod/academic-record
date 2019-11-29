@@ -37,33 +37,20 @@ data <- get_data(key, save_backup = TRUE, ignore_future = TRUE)
 ```{r Filter, warning=FALSE}
 data_table <- select(data, Date, Name, Type, Language)
 ```
-## Preprints
-```{r Preprints}
-preprints <- filter(data, Type == 'Preprint')
-preprints <- select(preprints, Date, NameURL, Role)
 
-preprints_num <- nrow(preprints)
+## Scientific articles
+
+```{r Papers}
+papers <- filter(data, Type == 'Paper')
+papers <- select(papers, Date, NameURL, Author, Status, Publisher)
+
+papers_num <- nrow(papers)
 ```
 
-I have `r preprints_num` preprint(s) waiting to be published:
+I've been author or coauthor in `r papers_num` scientific articles:
 
-```{r PreprintsTab}
-kable(preprints, format='pandoc')
-```
-
-## Coautorships
-
-```{r Coauthor}
-coauth <- filter(data, Type == 'Paper' & Role == 'Coauthor')
-coauth <- select(coauth, Date, NameURL, Author, Publisher)
-
-coauth_num <- nrow(coauth)
-```
-
-I've been coauthor in `r coauth_num` paper:
-
-```{r CoauthTab}
-kable(coauth, format='pandoc')
+```{r PapersTab}
+kable(papers, format='pandoc')
 ```
 
 ## Books
