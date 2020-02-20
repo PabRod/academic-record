@@ -55,17 +55,16 @@ get_data <- function(key, save_backup = TRUE, ignore_future = TRUE)
 
 parse_academic_production <- function(key) {
   ## Download using read-only link
-  # As seen here: https://stackoverflow.com/questions/42461806/getting-a-csv-read-into-r-though-a-shareable-google-drive-link
-
+  # See https://stackoverflow.com/questions/22873602/importing-data-into-r-from-google-spreadsheet
+  
   ## Load required libraries
   library(dplyr)
   library(lubridate)
+  library(gsheet)
 
   ## Download the data
-  sheet <- "Hoja 1"
-  link <- sprintf("https://docs.google.com/spreadsheets/d/%s/gviz/tq?tqx=out:csv&sheet={%s}", key, sheet)
-  raw <- read.csv(link, encoding='UTF-8', dec=',')
-
+  raw <- gsheet2tbl(sprintf('docs.google.com/spreadsheets/d/%s', key))
+  
   ## Clean the data
   tidy <- raw # By default, everything is understood as a factor
 
@@ -97,8 +96,8 @@ parse_academic_production <- function(key) {
   # Combine name and URL in a clickable string for electronic publications
   tidy <- mutate(tidy,
                  NameURL = case_when(
-                   URL == "" ~ Name,
-                   URL != "" ~ paste0("[", Name, "](", URL, ")"))
+                   is.na(URL) ~ Name,
+                   !is.na(URL) ~ paste0("[", Name, "](", URL, ")"))
                    )
 }
 
