@@ -54,6 +54,19 @@ He sido autor o coautor en `r papers_num` artículos científicos:
 kable(papers, format='pandoc')
 ```
 
+## Tesis doctoral
+```{r thesis}
+## My PhD thesis
+theses <- filter(data, Type == 'Thesis' & (Role == 'Chapter author' | Role == 'Author'))
+theses <- select(theses, Date, NameURL, Role, Institution)
+
+theses_num <- nrow(theses)
+```
+
+```{r ThesisTab}
+kable(theses, format='pandoc')
+```
+
 ## Libros
 
 ```{r Books}

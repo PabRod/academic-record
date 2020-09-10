@@ -53,6 +53,19 @@ I've been author or coauthor in `r papers_num` scientific articles:
 kable(papers, format='pandoc')
 ```
 
+## PhD thesis
+```{r thesis}
+## My PhD thesis
+theses <- filter(data, Type == 'Thesis' & (Role == 'Chapter author' | Role == 'Author'))
+theses <- select(theses, Date, NameURL, Role, Institution)
+
+theses_num <- nrow(theses)
+```
+
+```{r ThesisTab}
+kable(theses, format='pandoc')
+```
+
 ## Books
 
 ```{r Books}
