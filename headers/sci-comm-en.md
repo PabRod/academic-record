@@ -1,8 +1,9 @@
-Title: Science communication
-Date: 11/10/2020, 3:36:58 PM
+Title: In the media
+Date: 4/12/2018, 11:15:11 AM
 Category: About-me
 Tags: info
 Slug: sci-comm
 Lang: en
+Status: hidden
 Authors: Pablo Rodríguez-Sánchez
 Summary: Activities and publications related with science communication
