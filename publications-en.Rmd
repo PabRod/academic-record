@@ -76,7 +76,7 @@ books <- select(books, Date, Name, Role, Institution)
 books_num <- nrow(books)
 ```
 
-I've been involved in the redaction of `r books_num` book:
+I've been involved in the writing of `r books_num` book:
 
 ```{r BooksTab}
 kable(books, format='pandoc')
