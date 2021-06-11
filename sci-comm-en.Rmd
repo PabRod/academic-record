@@ -59,7 +59,7 @@ other <- filter(data, Type == 'Interview' | Type == 'Podcast' | Type == 'TV' | T
 other_table <- select(other, Date, NameURL, Type, Role, Institution, Language)
 ```
 
-Up to date, I've given `r nrow(talks)` talks for a general audience. Additionally, I've published `r nrow(sci_comm)` science communication essays: `r nrow(sci_comm_table_en)` in English, and `r nrow(sci_comm_table_es)` in Spanish.
+Up to date, I've given `r nrow(talks)` talks for a general audience. Additionally, I've published `r nrow(sci_comm)` science communication blog pieces: `r nrow(sci_comm_table_en)` in English, and `r nrow(sci_comm_table_es)` in Spanish.
 
 ### Talks
 ```{r TalksTab}
