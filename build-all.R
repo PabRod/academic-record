@@ -6,7 +6,7 @@ source('config.R')
 source('auxs.R')
 
 # Generate each of the n documents
-n <- length(config$inputs)
+n <- nrow(config)
 for (i in 1:n) {
   if (config$active[i]) { # Only render if active
     updateHeader(config$headers[i], config$hdr_temp[i]) # Generate temporary header with current date and time
