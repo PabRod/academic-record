@@ -30,5 +30,8 @@ jobs:
           renv::restore()
         shell: Rscript {0}
 
+      - name: Key
+        run: ${{ secrets.KEY }} >> key.txt
+
       - name: Test
         run: Rscript build-all.R
