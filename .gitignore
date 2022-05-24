@@ -10,7 +10,6 @@
 *.pdf
 *.Rda
 *with_date*
-\renv
 
 key.txt
 academic-record.md
