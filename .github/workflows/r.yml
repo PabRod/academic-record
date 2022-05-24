@@ -23,6 +23,7 @@ jobs:
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
           restore-keys: |
               ${{ runner.os }}-renv-
+
       - name: Install dependencies
         run: |
           if (!requireNamespace('renv', quietly = TRUE)) install.packages('renv')
@@ -30,5 +31,4 @@ jobs:
         shell: Rscript {0}
 
       - name: Test
-        run: library(rmarkdown)
-        shell: Rscript {0}
+        run: Rscript build-all.R
