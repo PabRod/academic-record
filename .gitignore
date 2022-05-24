@@ -16,3 +16,5 @@ academic-record.md
 backup.csv
 output/
 key_grades.txt
+.gitsecret/keys/random_seed
+!*.secret
