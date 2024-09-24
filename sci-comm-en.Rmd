@@ -22,7 +22,7 @@ source('config.R')
 
 library(knitr)
 library(dplyr)
-library(ggplot2)
+
 library(kableExtra)
 library(readr)
 library(sp)

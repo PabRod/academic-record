@@ -141,13 +141,13 @@ get_flag <- function(countryName, width=30, height=20) {
   flagURL <- sprintf('<img src="http://flagpedia.net/data/flags/mini/%s.png" alt="Drawing" title="%s" style="width: %dpx; height: %dpx"/>', tolower(code), countryName, width, height)
 }
 
-plot_map <- function(countries) {
-  library(maptools)
-
-  data(wrld_simpl)
-  myCountries = wrld_simpl@data$NAME %in% countries
-  plot(wrld_simpl, xlim = c(0,10), ylim = c(35,60), bg='lightblue', col = c('lightgrey', 'olivedrab3')[myCountries+1])
-}
+# plot_map <- function(countries) {
+#   library(maptools)
+# 
+#   data(wrld_simpl)
+#   myCountries = wrld_simpl@data$NAME %in% countries
+#   plot(wrld_simpl, xlim = c(0,10), ylim = c(35,60), bg='lightblue', col = c('lightgrey', 'olivedrab3')[myCountries+1])
+# }
 
 plot_cities <- function(data) {
   library(maps)
@@ -177,50 +177,50 @@ updateHeader <- function(input, output, encoding='utf-8') {
   writeLines(header_with_date, con = output)
 }
 
-createStreamPlot <- function() {
-  # Library
-  library(streamgraph)
-  
-  # Create data:
-  year0 <- 2002
-  year99 <- 2019
-  tSteps <- year99 - year0 + 1
-  
-  cats <- c('Physics student at UCM', 'Science teacher', 'Science journalist at Naukas', 'R&D Engineer at IOT', 'PhD student at WUR')
-  cols <- c('green', 'darkgreen', 'blue', 'red', 'orange')
-  nCat <- length(cats)
-  
-  year <- rep(seq(year0, year99) , each = nCat)
-  name <- rep(cats , tSteps)
-  colors <- rep(cols, tSteps)
-  
-  value <- c(8, 0, 0, 0, 0, #2002
-             4, 4, 0, 0, 0, #2003
-             4, 4, 0, 0, 0, #2004
-             4, 4, 0, 0, 0, #2005
-             4, 4, 0, 0, 0, #2006
-             4, 4, 0, 0, 0, #2007
-             4, 4, 0, 0, 0, #2008
-             4, 4, 0, 0, 0, #2009
-             4, 4, 0, 0, 0, #2010
-             4, 4, 2, 0, 0, #2011
-             0, 0, 2, 8, 0, #2012
-             0, 0, 2, 8, 0, #2013
-             0, 0, 2, 8, 0, #2014
-             0, 0, 2, 8, 0, #2015
-             0, 0, 2, 0, 8, #2016
-             0, 0, 2, 0, 8, #2017
-             0, 0, 2, 0, 8, #2018
-             0, 0, 2, 0, 8) #2019
-  
-  
-  data <- data.frame(year, name, value, cols)
-  
-  # Stream graph with a legend
-  p <- streamgraph(data, key="name", value="value", date="year", interpolate = "basis", interactive = FALSE) %>% 
-    #sg_legend(show=TRUE, label="names: ") %>% 
-    sg_axis_x(tick_interval = 1) %>%
-    sg_axis_y(tick_count = 0)
-  # sg_annotate("ak", x = 2008, y = 1, size = 100)
-  #sg_fill_manual(cols)
-}
+# createStreamPlot <- function() {
+#   # Library
+#   library(streamgraph)
+#   
+#   # Create data:
+#   year0 <- 2002
+#   year99 <- 2019
+#   tSteps <- year99 - year0 + 1
+#   
+#   cats <- c('Physics student at UCM', 'Science teacher', 'Science journalist at Naukas', 'R&D Engineer at IOT', 'PhD student at WUR')
+#   cols <- c('green', 'darkgreen', 'blue', 'red', 'orange')
+#   nCat <- length(cats)
+#   
+#   year <- rep(seq(year0, year99) , each = nCat)
+#   name <- rep(cats , tSteps)
+#   colors <- rep(cols, tSteps)
+#   
+#   value <- c(8, 0, 0, 0, 0, #2002
+#              4, 4, 0, 0, 0, #2003
+#              4, 4, 0, 0, 0, #2004
+#              4, 4, 0, 0, 0, #2005
+#              4, 4, 0, 0, 0, #2006
+#              4, 4, 0, 0, 0, #2007
+#              4, 4, 0, 0, 0, #2008
+#              4, 4, 0, 0, 0, #2009
+#              4, 4, 0, 0, 0, #2010
+#              4, 4, 2, 0, 0, #2011
+#              0, 0, 2, 8, 0, #2012
+#              0, 0, 2, 8, 0, #2013
+#              0, 0, 2, 8, 0, #2014
+#              0, 0, 2, 8, 0, #2015
+#              0, 0, 2, 0, 8, #2016
+#              0, 0, 2, 0, 8, #2017
+#              0, 0, 2, 0, 8, #2018
+#              0, 0, 2, 0, 8) #2019
+#   
+#   
+#   data <- data.frame(year, name, value, cols)
+#   
+#   # Stream graph with a legend
+#   p <- streamgraph(data, key="name", value="value", date="year", interpolate = "basis", interactive = FALSE) %>% 
+#     #sg_legend(show=TRUE, label="names: ") %>% 
+#     sg_axis_x(tick_interval = 1) %>%
+#     sg_axis_y(tick_count = 0)
+#   # sg_annotate("ak", x = 2008, y = 1, size = 100)
+#   #sg_fill_manual(cols)
+# }
