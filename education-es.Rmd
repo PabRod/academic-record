@@ -46,7 +46,7 @@ formal <- mutate(formal, Country = get_flag(Country))
 ```
 
 ```{r FormalTab}
-kable(formal, format='pandoc')
+kable(formal, format='markdown')
 ```
 
 ## Estancias
@@ -62,7 +62,7 @@ secs_duration <- sum(secs$Duration)
 He tenido la oportunidad de realizar las siguientes estancias internacionales:
 
 ```{r SecondmentsTab}
-kable(secs, format='pandoc')
+kable(secs, format='markdown')
 ```
 
 ## Conferencias y talleres
@@ -77,7 +77,7 @@ confs_num <- nrow(confs)
 He participado en `r confs_num` conferencias, congresos y talleres:
 
 ```{r ConferencesTab}
-kable(confs, format='pandoc')
+kable(confs, format='markdown')
 ```
 
 ***

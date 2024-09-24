@@ -50,7 +50,7 @@ classes_num <- nrow(classes)
 He participado en la docencia de `r classes_num` cursos:
 
 ```{r ClassesTab}
-kable(classes, format='pandoc')
+kable(classes, format='markdown')
 ```
 
 ***

@@ -63,24 +63,24 @@ Up to date, I've given `r nrow(talks)` talks for a general audience. Additionall
 
 ### Talks
 ```{r TalksTab}
-kable(talks, format='pandoc')
+kable(talks, format='markdown')
 ```
 
 ### Science communication publications in English
 
 ```{r ScicommEnglish}
-kable(sci_comm_table_en, format='pandoc')
+kable(sci_comm_table_en, format='markdown')
 ```
 
 ### Science communication publications in Spanish
 
 ```{r ScicommTab}
-kable(sci_comm_table_es, format='pandoc')
+kable(sci_comm_table_es, format='markdown')
 ```
 
 ### Others
 ```{r Others tab}
-kable(other_table, format='pandoc')
+kable(other_table, format='markdown')
 ```
 
 ```{r ScicommDist, eval=FALSE}

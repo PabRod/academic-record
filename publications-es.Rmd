@@ -51,7 +51,7 @@ papers_num <- nrow(papers)
 He sido autor o coautor en `r papers_num` artículos científicos:
 
 ```{r PapersTab}
-kable(papers, format='pandoc')
+kable(papers, format='markdown')
 ```
 
 ## Tesis doctoral
@@ -64,7 +64,7 @@ theses_num <- nrow(theses)
 ```
 
 ```{r ThesisTab}
-kable(theses, format='pandoc')
+kable(theses, format='markdown')
 ```
 
 ## Libros
@@ -80,7 +80,7 @@ books_num <- nrow(books)
 He participado en la redacción de `r books_num` libro:
 
 ```{r BooksTab}
-kable(books, format='pandoc')
+kable(books, format='markdown')
 ```
 
 ## Software científico
@@ -94,7 +94,7 @@ code_num <- nrow(code)
 He publicado `r code_num` pequeños proyectos de software científico:
 
 ```{r CodeTab}
-kable(code, format='pandoc')
+kable(code, format='markdown')
 ```
 
 ***

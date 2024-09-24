@@ -46,7 +46,7 @@ formal <- mutate(formal, Country = get_flag(Country))
 ```
 
 ```{r FormalTab}
-kable(formal, format='pandoc')
+kable(formal, format='markdown')
 ```
 
 ## Secondments
@@ -62,7 +62,7 @@ secs_duration <- sum(secs$Duration)
 I had the following secondments in other institutions:
 
 ```{r SecondmentsTab}
-kable(secs, format='pandoc')
+kable(secs, format='markdown')
 ```
 
 ## Conferences and workshops
@@ -77,7 +77,7 @@ confs_num <- nrow(confs)
 I've attended `r confs_num` congresses and workshops:
 
 ```{r ConferencesTab}
-kable(confs, format='pandoc')
+kable(confs, format='markdown')
 ```
 
 ***

@@ -50,7 +50,7 @@ papers_num <- nrow(papers)
 I've been author or coauthor in `r papers_num` scientific articles:
 
 ```{r PapersTab}
-kable(papers, format='pandoc')
+kable(papers, format='markdown')
 ```
 
 ## PhD thesis
@@ -63,7 +63,7 @@ theses_num <- nrow(theses)
 ```
 
 ```{r ThesisTab}
-kable(theses, format='pandoc')
+kable(theses, format='markdown')
 ```
 
 ## Books
@@ -79,7 +79,7 @@ books_num <- nrow(books)
 I've been involved in the writing of `r books_num` book:
 
 ```{r BooksTab}
-kable(books, format='pandoc')
+kable(books, format='markdown')
 ```
 
 ## Scientific code
@@ -93,7 +93,7 @@ code_num <- nrow(code)
 I made available `r code_num` of my small projects about scientific software:
 
 ```{r CodeTab}
-kable(code, format='pandoc')
+kable(code, format='markdown')
 ```
 
 
